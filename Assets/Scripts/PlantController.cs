@@ -32,7 +32,6 @@ public class PlantController : MonoBehaviour
         if (Time.time > timeOfNextEat)
             speed -= speedDecay * Time.deltaTime;
         speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
-        Debug.Log(speed);
 
         //Movement
         PerformMovement();
