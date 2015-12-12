@@ -1,9 +1,13 @@
 fileFormatVersion: 2
 guid: 2fadd134d20edf4478c246f9215bbbb7
-timeCreated: 1449902408
+timeCreated: 1449906589
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Clouds_0
+    21300002: Clouds_1
+    21300004: Clouds_2
+    21300006: Clouds_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +42,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +53,148 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Clouds_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 146, y: -104}
+        - {x: 217, y: -98}
+        - {x: 243, y: -87}
+        - {x: 244, y: -82}
+        - {x: 244, y: -31}
+        - {x: 240, y: -26}
+        - {x: 201, y: 19}
+        - {x: 165, y: 28}
+        - {x: 150, y: 38}
+        - {x: 127, y: 52}
+        - {x: 45, y: 70}
+        - {x: 14, y: 97}
+        - {x: -81, y: 97}
+        - {x: -129, y: 90}
+        - {x: -150, y: 84}
+        - {x: -161, y: 79}
+        - {x: -228, y: 9}
+        - {x: -228, y: -12}
+        - {x: -221, y: -49}
+        - {x: -182, y: -83}
+        - {x: -168, y: -86}
+        - {x: -120, y: -93}
+        - {x: -40, y: -95}
+        - {x: -11, y: -100}
+        - {x: 2, y: -107}
+        - {x: 30, y: -107}
+        - {x: 39, y: -106}
+        - {x: 60, y: -92}
+        - {x: 74, y: -99}
+        - {x: 95, y: -103}
+    - name: Clouds_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 213, y: -25}
+        - {x: 31, y: -25}
+        - {x: 24, y: -35}
+        - {x: 24, y: -73}
+        - {x: 36, y: -103}
+        - {x: 212, y: -103}
+        - {x: 222, y: -81}
+        - {x: 222, y: -34}
+      - - {x: -185, y: 94}
+        - {x: -194, y: 93}
+        - {x: -194, y: -1}
+        - {x: -184, y: -15}
+        - {x: -145, y: -18}
+        - {x: 82, y: -18}
+        - {x: 92, y: -5}
+        - {x: 92, y: 45}
+        - {x: 45, y: 94}
+    - name: Clouds_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 193, y: 25}
+        - {x: 175, y: 46}
+        - {x: 135, y: 84}
+        - {x: 124, y: 87}
+        - {x: 40, y: 103}
+        - {x: -43, y: 103}
+        - {x: -124, y: 72}
+        - {x: -184, y: 92}
+        - {x: -225, y: 91}
+        - {x: -255, y: 52}
+        - {x: -255, y: 7}
+        - {x: -233, y: -19}
+        - {x: -208, y: -25}
+        - {x: -124, y: -44}
+        - {x: -64, y: -41}
+        - {x: -44, y: -56}
+        - {x: 12, y: -56}
+        - {x: 85, y: -53}
+        - {x: 150, y: -46}
+        - {x: 170, y: -40}
+        - {x: 193, y: -8}
+    - name: Clouds_3
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 79, y: -2}
+        - {x: -27, y: -37}
+        - {x: -27, y: -78}
+        - {x: 28, y: -107}
+        - {x: 171, y: -107}
+        - {x: 199, y: -103}
+        - {x: 239, y: -79}
+        - {x: 239, y: -13}
+        - {x: 210, y: -2}
+      - - {x: -221, y: 119}
+        - {x: -241, y: 94}
+        - {x: -250, y: 76}
+        - {x: -250, y: 44}
+        - {x: -232, y: 5}
+        - {x: -164, y: -35}
+        - {x: -153, y: -37}
+        - {x: -16, y: -37}
+        - {x: 8, y: -34}
+        - {x: 8, y: 75}
+        - {x: -125, y: 119}
+      - - {x: 57, y: 110}
+        - {x: 49, y: 108}
+        - {x: 37, y: 72}
+        - {x: 37, y: 24}
+        - {x: 54, y: 14}
+        - {x: 210, y: 14}
+        - {x: 233, y: 48}
+        - {x: 233, y: 95}
+        - {x: 191, y: 110}
     outline: []
   spritePackingTag: 
   userData: 
