@@ -4,9 +4,9 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     [SerializeField] private float lifetime = 12f;
-    [SerializeField] private float diveThreshold = 3f;
-    [SerializeField] private float diveSpeed = 4.5f;
-    [SerializeField] private float diveAbove = 3f;
+    [SerializeField] private float diveThreshold = 2.5f;
+    [SerializeField] private float diveSpeed = 6.5f;
+    [SerializeField] private float diveAbove = 2f;
 
     private GameObject plant;
     private float sqrDiveThreshold;

@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4f1920e9f97ef40a5c68f85b225863, type: 3}
   m_Name: Game Constants
   m_EditorClassIdentifier: 
-  skyEndHeight: 10
-  spaceEndHeight: 350
-  sunEndHeight: 400
+  skyEndHeight: 100
+  spaceEndHeight: 150
+  sunEndHeight: 200

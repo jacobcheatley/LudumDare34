@@ -9,12 +9,14 @@ public class PlantController : MonoBehaviour
     [SerializeField] private float horizontalSpeedRatio = 0.75f;
 
     [Header("Eating")]
-    [SerializeField] private float speedBoostPerFly = 0.15f;
+    [SerializeField] private float speedBoostPerFly = 0.25f;
+    [SerializeField] private float speedBoostPerAlien = 0.5f;
     [SerializeField] private float speedDecay = 3.0f;
     [SerializeField] private float timeBetweenEatsBeforeSlow = 3.0f;
 
     [Header("Getting Hit")]
-    [SerializeField] private float speedPenaltyPerBird = 0.5f;
+    [SerializeField] private float speedPenaltyPerBird = 2.5f;
+    [SerializeField] private float speedPenaltyPerAsteroid = 5f;
     [SerializeField] private float hitCooldown = 1.0f;
 
     //Hidden or private
@@ -67,7 +69,7 @@ public class PlantController : MonoBehaviour
     {
         if (other.name == "Fly(Clone)")
         {
-            EatFly();
+            EatSpeedBoost(speedBoostPerFly);
             Destroy(other.gameObject);
         }
         else if (other.name == "Bird(Clone)")
@@ -76,15 +78,20 @@ public class PlantController : MonoBehaviour
         }
         else if (other.name == "Asteroid(Clone)")
         {
-            
+            GetHitByAsteroid();
+        }
+        else if (other.name == "Alien(Clone)")
+        {
+            EatSpeedBoost(speedBoostPerAlien);
+            Destroy(other.gameObject);
         }
     }
 
-    void EatFly()
+    void EatSpeedBoost(float speedBoost)
     {
         timeOfNextEat = Time.time + timeBetweenEatsBeforeSlow;
-        speed += speedBoostPerFly;
-        OnChangedSpeed(new ChangedSpeedArgs { Amount = speedBoostPerFly });
+        speed += speedBoost;
+        OnChangedSpeed(new ChangedSpeedArgs { Amount = speedBoost });
     }
 
     void GetHitByBird()
@@ -94,6 +101,16 @@ public class PlantController : MonoBehaviour
             timeSinceLastHit = 0;
             speed -= speedPenaltyPerBird;
             OnChangedSpeed(new ChangedSpeedArgs { Amount = -speedPenaltyPerBird });
+        }
+    }
+
+    void GetHitByAsteroid()
+    {
+        if (timeSinceLastHit > hitCooldown)
+        {
+            timeSinceLastHit = 0;
+            speed -= speedPenaltyPerAsteroid;
+            OnChangedSpeed(new ChangedSpeedArgs {Amount = -speedPenaltyPerAsteroid});
         }
     }
 }
