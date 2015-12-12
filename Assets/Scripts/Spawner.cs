@@ -51,7 +51,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (bg.stage == BackgroundStage.Stage.Sky)
+        if (bg.CurrentStage == BackgroundStage.Stage.Sky)
         {
             if (transform.position.y > nextFlySpawnHeight)
                 SpawnFly();
@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
             if (transform.position.y > nextCloudSpawnHeight)
                 SpawnCloud();
         }
-        else if (bg.stage == BackgroundStage.Stage.Space)
+        else if (bg.CurrentStage == BackgroundStage.Stage.Space)
         {
             if (transform.position.y > nextAsteroidSpawnHeight)
                 SpawnAsteroid();
