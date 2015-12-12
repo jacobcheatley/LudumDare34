@@ -2,16 +2,15 @@
 
 public class CameraScrolling : MonoBehaviour
 {
-    [SerializeField] private float playerVerticalSpeed;
+    private PlantController plant;
 
     void Start()
     {
-        transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
-        transform.position += Vector3.back;
+        plant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlantController>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        transform.position += new Vector3(0f, playerVerticalSpeed * Time.deltaTime);
+        transform.position += new Vector3(0f, plant.verticalSpeed * Time.deltaTime);
     }
 }

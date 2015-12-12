@@ -2,7 +2,7 @@
 
 public class PlantController : MonoBehaviour
 {
-    [SerializeField] private float verticalSpeed = 1;
+    public float verticalSpeed = 1;
     [SerializeField] private float horizontalSpeed = 1;
 
     void Update()
@@ -11,6 +11,6 @@ public class PlantController : MonoBehaviour
         Vector3 velocity = new Vector3(horizontalInput * horizontalSpeed, verticalSpeed);
         Vector3 displacement = velocity * Time.deltaTime;
 
-        transform.Translate(displacement);
+        transform.position += displacement;
     }
 }
