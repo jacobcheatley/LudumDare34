@@ -3,6 +3,7 @@
 public class CameraScrolling : MonoBehaviour
 {
     private PlantController plant;
+    
 
     void Start()
     {
