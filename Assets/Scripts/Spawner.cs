@@ -7,17 +7,18 @@ public class Spawner : MonoBehaviour
 
     [Header("All")]
     [SerializeField] private float distanceAbove = 1f;
-    [SerializeField] private float boundaryWidth = 0.5f;
+    [SerializeField] private float boundaryWidth = 1.5f;
     private float minSpawnX, maxSpawnX;
 
     [Header("Flies")]
     [SerializeField] private GameObject fly;
-    [SerializeField] private float timeBetweenFlySpawns = 0.5f;
-    private float nextFlySpawnTime;
+    [SerializeField] private float averageDistanceBetweenFlySpawns = 4f;
+    [SerializeField] private float rangeDistanceBetweenFlySpawns = 1f;
+    private float nextFlySpawnHeight;
 
     void Start()
     {
-        nextFlySpawnTime = Time.time + timeBetweenFlySpawns;
+        nextFlySpawnHeight = transform.position.y + averageDistanceBetweenFlySpawns;
         screenWorldWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
         screenWorldHeight = screenWorldWidth * Screen.height / Screen.width;
         minSpawnX = -screenWorldWidth + boundaryWidth;
@@ -26,9 +27,9 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (Time.time > nextFlySpawnTime)
+        if (transform.position.y > nextFlySpawnHeight)
         {
-            nextFlySpawnTime = Time.time + timeBetweenFlySpawns;
+            nextFlySpawnHeight = transform.position.y + averageDistanceBetweenFlySpawns + Random.Range(-rangeDistanceBetweenFlySpawns, rangeDistanceBetweenFlySpawns);
             float flySpawnX = transform.position.x + Random.Range(minSpawnX, maxSpawnX);
             float flySpawnY = transform.position.y + screenWorldHeight + distanceAbove;
             Instantiate(fly, new Vector3(flySpawnX, flySpawnY), Quaternion.identity);

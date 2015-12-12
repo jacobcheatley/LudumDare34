@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 485008}
   - 212: {fileID: 21260102}
   - 58: {fileID: 5844688}
+  - 114: {fileID: 11466222}
   m_Layer: 0
   m_Name: Fly
   m_TagString: Untagged
@@ -38,11 +39,26 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.18
+--- !u!114 &11466222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327190fa5579fc14d83c495cfab51ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 6
+  maxWanderDistance: 1.5
+  timeBetweenWanders: 0.5
+  speed: 1
 --- !u!212 &21260102
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -79,7 +95,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 142716}

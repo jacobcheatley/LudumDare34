@@ -11,6 +11,6 @@ public class CameraScrolling : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position += new Vector3(0f, plant.verticalSpeed * Time.deltaTime);
+        transform.position += new Vector3(0f, plant.speed * Time.deltaTime);
     }
 }
