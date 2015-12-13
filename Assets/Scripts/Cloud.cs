@@ -13,7 +13,7 @@ public class Cloud : MonoBehaviour
     {
         Destroy(gameObject, lifetime);
         speed = averageSpeed + Random.Range(-rangeSpeed, rangeSpeed);
-        GetComponent<SpriteRenderer>().sprite = cloudsSprites[Random.Range(0, cloudsSprites.Length)];
+        GetComponent<SpriteRenderer>().sprite = Utility.ChooseOne(cloudsSprites);
     }
 
     void Update()

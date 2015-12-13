@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private float lifetime = 12f;
     [SerializeField] private float diveThreshold = 2.5f;
     [SerializeField] private float diveSpeed = 6.5f;
     [SerializeField] private float diveAbove = 2f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip[] birdCalls;
+    [SerializeField] private AudioClip[] wingFlaps;
+
     private GameObject plant;
     private float sqrDiveThreshold;
     private bool diving;
+    private AudioSource audioSource;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
         sqrDiveThreshold = diveThreshold * diveThreshold;
         plant = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -26,6 +33,8 @@ public class Bird : MonoBehaviour
         {
             diving = true;
             StartCoroutine(Dive(difference));
+            audioSource.PlayOneShot(Utility.ChooseOne(birdCalls));
+            audioSource.PlayOneShot(Utility.ChooseOne(wingFlaps));
         }
     }
 

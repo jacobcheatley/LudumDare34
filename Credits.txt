@@ -1,0 +1,15 @@
+#Music:
+Background Music - @abstraction on soundcloud (https://soundcloud.com/abstraction/)
+Plant Chomp (Cut) - http://freesound.org/people/TinyJiro/sounds/96891/
+Bird Call 1 - http://freesound.org/people/davidworksonline/sounds/54973/
+Bird Call 2 - http://freesound.org/people/vixuxx/sounds/9874/
+Wing Flap 1, 2 and 3 (Cut) - http://freesound.org/people/promete/sounds/60143/
+Fly Death (Cut) and Fly Wander (Cut) - http://freesound.org/people/soundmary/sounds/194932/
+Alien Death 1, 2 and 3 (Cut) - http://freesound.org/people/Airborne80/sounds/240852/
+Alien Ship (Cut) - 
+
+
+#Tools:
+Game Engine - Unity3D 5.3 with Visual Studio and ReSharper
+Audio Cutting - Audacity
+"Art" - Adobe Photoshop CC

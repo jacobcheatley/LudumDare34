@@ -8,7 +8,7 @@ public class Leaf : MonoBehaviour
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = leafSprites[Random.Range(0, leafSprites.Length)];
+        GetComponent<SpriteRenderer>().sprite = Utility.ChooseOne(leafSprites);
         Destroy(gameObject, lifeTime);
     }
 }

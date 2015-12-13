@@ -2,10 +2,14 @@
 
 public class Fly : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private float lifetime = 6f;
     [SerializeField] private float maxWanderDistance = 1.5f;
     [SerializeField] private float timeBetweenWanders = 0.5f;
     [SerializeField] private float speed = 1.0f;
+
+    [Header("Sounds")]
+    public AudioClip Death;
 
     private Vector3 initialPosition;
     private Vector3 wanderPoint;

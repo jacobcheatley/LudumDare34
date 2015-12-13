@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private float lifetime = 7f;
     [SerializeField] private float averageSpeed = 4f;
     [SerializeField] private float rangeSpeed = 0.5f;
+
+    [Header("Audio")]
+    public AudioClip[] DeathSounds;
 
     private float minX, maxX;
     private float speed;

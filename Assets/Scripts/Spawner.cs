@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnFly()
     {
-        nextFlySpawnHeight = transform.position.y + AroundValue(averageDistanceBetweenFlies, rangeDistanceBetweenFlies);
+        nextFlySpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenFlies, rangeDistanceBetweenFlies);
         float flySpawnX = transform.position.x + Random.Range(minSpawnX, maxSpawnX);
         float flySpawnY = DefaultAboveHeight();
         Instantiate(fly, new Vector3(flySpawnX, flySpawnY), Quaternion.identity);
@@ -85,15 +85,15 @@ public class Spawner : MonoBehaviour
 
     void SpawnBird()
     {
-        nextBirdSpawnHeight = transform.position.y + AroundValue(averageDistanceBetweenBirds, rangeDistanceBetweenBirds);
-        float birdSpawnX = transform.position.x + Random.value < 0.5 ? minSpawnX : maxSpawnX + AroundValue(0, birdXJitter);
+        nextBirdSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenBirds, rangeDistanceBetweenBirds);
+        float birdSpawnX = transform.position.x + Random.value < 0.5 ? minSpawnX : maxSpawnX + Utility.AroundValue(0, birdXJitter);
         float birdSpawnY = DefaultAboveHeight();
         Instantiate(bird, new Vector3(birdSpawnX, birdSpawnY), Quaternion.identity);
     }
 
     void SpawnCloud()
     {
-        nextCloudSpawnHeight = transform.position.y + AroundValue(averageDistanceBetweenClouds, rangeDistanceBetweenClouds);
+        nextCloudSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenClouds, rangeDistanceBetweenClouds);
         float cloudSpawnX = transform.position.x + minSpawnX * 4f;
         float cloudSpawnY = DefaultAboveHeight();
         Instantiate(cloud, new Vector3(cloudSpawnX, cloudSpawnY, 1), Quaternion.identity);
@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnAsteroid()
     {
-        nextAsteroidSpawnHeight = transform.position.y + AroundValue(averageDistanceBetweenAsteroids, rangeDistanceBetweenAsteroids);
+        nextAsteroidSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenAsteroids, rangeDistanceBetweenAsteroids);
         float asteroidSpawnX = transform.position.x + Random.value < 0.5 ? minSpawnX * 2f : maxSpawnX * 2f;
         float asteroidSpawnY = DefaultAboveHeight();
         Instantiate(asteroid, new Vector3(asteroidSpawnX, asteroidSpawnY), Quaternion.identity);
@@ -110,7 +110,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnAlien()
     {
-        nextAlienSpawnHeight = transform.position.y + AroundValue(averageDistanceBetweenAliens, rangeDistanceBetweenAliens);
+        nextAlienSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenAliens, rangeDistanceBetweenAliens);
         bool leftSide = Random.value < 0.5;
         float alienSpawnX = leftSide ? minSpawnX : maxSpawnX;
         float alienSpawnY = DefaultAboveHeight();
@@ -121,10 +121,5 @@ public class Spawner : MonoBehaviour
     float DefaultAboveHeight()
     {
         return transform.position.y + screenWorldHeight + distanceAbove;
-    }
-
-    float AroundValue(float value, float range)
-    {
-        return value + Random.Range(-range, range);
     }
 }

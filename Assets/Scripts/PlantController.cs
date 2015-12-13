@@ -19,11 +19,16 @@ public class PlantController : MonoBehaviour
     [SerializeField] private float speedPenaltyPerAsteroid = 5f;
     [SerializeField] private float hitCooldown = 1.0f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip chomp;
+    [SerializeField] private AudioClip hit;
+
     //Hidden or private
     [HideInInspector] public float speed;
     private float timeOfNextEat;
     private float horizontalInput;
     private float timeSinceLastHit;
+    private AudioSource audioSource;
 
     //Events
     [HideInInspector] public event EventHandler<ChangedSpeedArgs> ChangedSpeed;
@@ -39,6 +44,7 @@ public class PlantController : MonoBehaviour
         speed = minSpeed;
         timeSinceLastHit = hitCooldown;
         timeOfNextEat = Time.time;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -70,19 +76,21 @@ public class PlantController : MonoBehaviour
         if (other.name == "Fly(Clone)")
         {
             EatSpeedBoost(speedBoostPerFly);
+            audioSource.PlayOneShot(other.GetComponent<Fly>().Death, 0.5f);
             Destroy(other.gameObject);
         }
         else if (other.name == "Bird(Clone)")
         {
-            GetHitByBird();
+            HitSpeedPenalty(speedPenaltyPerBird);
         }
         else if (other.name == "Asteroid(Clone)")
         {
-            GetHitByAsteroid();
+            HitSpeedPenalty(speedPenaltyPerAsteroid);
         }
         else if (other.name == "Alien(Clone)")
         {
             EatSpeedBoost(speedBoostPerAlien);
+            audioSource.PlayOneShot(Utility.ChooseOne(other.GetComponent<Alien>().DeathSounds), 0.5f);
             Destroy(other.gameObject);
         }
     }
@@ -92,27 +100,39 @@ public class PlantController : MonoBehaviour
         timeOfNextEat = Time.time + timeBetweenEatsBeforeSlow;
         speed += speedBoost;
         OnChangedSpeed(new ChangedSpeedArgs { Amount = speedBoost });
+        audioSource.PlayOneShot(chomp);
     }
 
-    void GetHitByBird()
+    void HitSpeedPenalty(float speedPenalty)
     {
         if (timeSinceLastHit > hitCooldown)
         {
             timeSinceLastHit = 0;
-            speed -= speedPenaltyPerBird;
-            OnChangedSpeed(new ChangedSpeedArgs { Amount = -speedPenaltyPerBird });
+            speed -= speedPenalty;
+            OnChangedSpeed(new ChangedSpeedArgs { Amount = -speedPenalty });
         }
+        audioSource.PlayOneShot(hit);
     }
 
-    void GetHitByAsteroid()
-    {
-        if (timeSinceLastHit > hitCooldown)
-        {
-            timeSinceLastHit = 0;
-            speed -= speedPenaltyPerAsteroid;
-            OnChangedSpeed(new ChangedSpeedArgs {Amount = -speedPenaltyPerAsteroid});
-        }
-    }
+//    void GetHitByBird()
+//    {
+//        if (timeSinceLastHit > hitCooldown)
+//        {
+//            timeSinceLastHit = 0;
+//            speed -= speedPenaltyPerBird;
+//            OnChangedSpeed(new ChangedSpeedArgs { Amount = -speedPenaltyPerBird });
+//        }
+//    }
+//
+//    void GetHitByAsteroid()
+//    {
+//        if (timeSinceLastHit > hitCooldown)
+//        {
+//            timeSinceLastHit = 0;
+//            speed -= speedPenaltyPerAsteroid;
+//            OnChangedSpeed(new ChangedSpeedArgs {Amount = -speedPenaltyPerAsteroid});
+//        }
+//    }
 }
 
 public class ChangedSpeedArgs : EventArgs
