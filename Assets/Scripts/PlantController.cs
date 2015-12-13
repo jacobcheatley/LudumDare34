@@ -17,12 +17,16 @@ public class PlantController : MonoBehaviour
     [SerializeField] private float healthBoostPerFly = 0.25f;
     [SerializeField] private float speedBoostPerAlien = 0.5f;
     [SerializeField] private float healthBoostPerAlien = 0.25f;
+    [SerializeField] private float speedBoostPerGoodSprite = 0.5f;
+    [SerializeField] private float healthBoostPerGoodSprite = 0.25f;
 
     [Header("Getting Hit")]
     [SerializeField] private float speedPenaltyPerBird = 2.5f;
     [SerializeField] private float damagePerBird = 1f;
     [SerializeField] private float speedPenaltyPerAsteroid = 5f;
     [SerializeField] private float damagePerAsteroid = 1f;
+    [SerializeField] private float speedPenaltyPerEvilSprite = 2f;
+    [SerializeField] private float damagePerEvilSprite = 1f;
     [SerializeField] private float hitCooldown = 1.0f;
 
     [Header("Sounds")]
@@ -34,11 +38,14 @@ public class PlantController : MonoBehaviour
     [SerializeField] private string[] flyStrings;
     [SerializeField] private float scorePerAlien = 100f;
     [SerializeField] private string[] alienStrings;
+    [SerializeField] private float scorePerGoodSprite = 150f;
+    [SerializeField] private string[] goodSpriteStrings;
     [SerializeField] private float scoreLossPerBird = 100f;
     [SerializeField] private string[] birdStrings;
-    [SerializeField] private float scoreLossPerAsteroid = 250f;
+    [SerializeField] private float scoreLossPerAsteroid = 200f;
     [SerializeField] private string[] asteroidStrings;
-
+    [SerializeField] private float scoreLossPerEvilSprite = 300f;
+    [SerializeField] private string[] evilSpriteStrings;
 
     //Hidden or private
     [HideInInspector] public float speed;
@@ -72,6 +79,8 @@ public class PlantController : MonoBehaviour
             handler(this, e);
     }
 
+    private MusicController mController;
+
     //Methods
     void Start()
     {
@@ -79,6 +88,7 @@ public class PlantController : MonoBehaviour
         health = maxHealth;
         timeSinceLastHit = hitCooldown;
         audioSource = GetComponent<AudioSource>();
+        mController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MusicController>();
     }
 
     void Update()
@@ -108,7 +118,8 @@ public class PlantController : MonoBehaviour
             EatSpeedBoost(speedBoostPerFly);
             ModifyHealth(healthBoostPerFly);
             ScoreEvent(scorePerFly, Utility.ChooseOne(flyStrings));
-            audioSource.PlayOneShot(other.GetComponent<Fly>().Death, 0.5f);
+            if (mController.SFXplaying)
+                audioSource.PlayOneShot(other.GetComponent<Fly>().Death, 0.5f);
             Destroy(other.gameObject);
         }
         else if (other.name == "Bird(Clone)")
@@ -128,7 +139,22 @@ public class PlantController : MonoBehaviour
             EatSpeedBoost(speedBoostPerAlien);
             ModifyHealth(healthBoostPerAlien);
             ScoreEvent(scorePerAlien, Utility.ChooseOne(alienStrings));
-            audioSource.PlayOneShot(Utility.ChooseOne(other.GetComponent<Alien>().DeathSounds), 0.5f);
+            if (mController.SFXplaying)
+                audioSource.PlayOneShot(Utility.ChooseOne(other.GetComponent<Alien>().DeathSounds), 0.5f);
+            Destroy(other.gameObject);
+        }
+        else if (other.name == "Good Sprite(Clone)")
+        {
+            EatSpeedBoost(speedBoostPerGoodSprite);
+            ModifyHealth(healthBoostPerGoodSprite);
+            ScoreEvent(scorePerGoodSprite, Utility.ChooseOne(goodSpriteStrings));
+            Destroy(other.gameObject);
+        }
+        else if (other.name == "Evil Sprite(Clone)")
+        {
+            ModifyHealth(-damagePerEvilSprite);
+            ScoreEvent(-scoreLossPerEvilSprite, Utility.ChooseOne(evilSpriteStrings));
+            HitSpeedPenalty(speedPenaltyPerEvilSprite);
             Destroy(other.gameObject);
         }
     }
@@ -149,7 +175,8 @@ public class PlantController : MonoBehaviour
     {
         speed += speedBoost;
         OnChangedSpeed(new ChangedSpeedArgs { Amount = speedBoost, NewSpeed = speed});
-        audioSource.PlayOneShot(chomp);
+        if (mController.SFXplaying)
+            audioSource.PlayOneShot(chomp);
     }
 
     private void HitSpeedPenalty(float speedPenalty)
@@ -160,7 +187,8 @@ public class PlantController : MonoBehaviour
             speed -= speedPenalty;
             OnChangedSpeed(new ChangedSpeedArgs { Amount = -speedPenalty, NewSpeed = speed });
         }
-        audioSource.PlayOneShot(hit);
+        if (mController.SFXplaying)
+            audioSource.PlayOneShot(hit);
     }
 }
 

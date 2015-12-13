@@ -13,11 +13,20 @@ public class Alien : MonoBehaviour
 
     private float minX, maxX;
     private float speed;
+    private MusicController mController;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
         speed = averageSpeed + Random.Range(-rangeSpeed, rangeSpeed);
+        mController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MusicController>();
+    }
+
+    void Update()
+    {
+        //Yes, I am aware how bad and hacky the end game code is
+        if (!mController.SFXplaying)
+            Destroy(gameObject);
     }
 
     public void Setup(float minX, float maxX, float initialDirection)

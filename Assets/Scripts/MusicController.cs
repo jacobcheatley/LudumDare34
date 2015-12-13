@@ -11,17 +11,31 @@ public class MusicController : MonoBehaviour
 
     [SerializeField] private float transitionTime = 1f;
     private BackgroundStage bg;
+    [HideInInspector] public bool SFXplaying = true;
+
+    void Awake()
+    {
+        sky.TransitionTo(0f);
+    }
 
     void Start()
     {
         bg = GetComponent<BackgroundStage>();
         bg.ChangedStage += ChangedStage;
         bg.EndGame += EndGame;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlantController>().ChangedHealth += ChangedHealth;
+    }
+
+    private void ChangedHealth(object sender, ChangedHealthArgs e)
+    {
+        if (e.NewHealth <= 0)
+            SFXplaying = false;
     }
 
     private void EndGame(object sender, EventArgs e)
     {
         sadness.TransitionTo(transitionTime);
+        SFXplaying = false;
     }
 
     private void ChangedStage(object sender, ChangedStageArgs e)

@@ -14,18 +14,23 @@ public class Fly : MonoBehaviour
     private Vector3 initialPosition;
     private Vector3 wanderPoint;
     private float nextWanderTime;
+    private MusicController mController;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
         initialPosition = transform.position;
         wanderPoint = ChooseNewWanderPoint();
+        mController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MusicController>();
     }
 
     void Update()
     {
         if (Time.time > nextWanderTime)
             wanderPoint = ChooseNewWanderPoint();
+        //Yes, I am aware how bad and hacky the end game code is
+        if (!mController.SFXplaying)
+            Destroy(gameObject);
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, wanderPoint, step);
     }

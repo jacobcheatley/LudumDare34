@@ -39,6 +39,18 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float rangeDistanceBetweenAsteroids = 5f;
     private float nextAsteroidSpawnHeight;
 
+    [Header("GoodSunSprites")]
+    [SerializeField] private GameObject goodSprite;
+    [SerializeField] private float averageDistanceBetweenGoodSprites = 10f;
+    [SerializeField] private float rangeDistanceBetweenGoodSprites = 1f;
+    private float nextGoodSpriteSpawnHeight;
+
+    [Header("EvilSunSprites")]
+    [SerializeField] private GameObject evilSprite;
+    [SerializeField] private float averageDistanceBetweenEvilSprites = 10f;
+    [SerializeField] private float rangeDistanceBetweenEvilSprites = 1f;
+    private float nextEvilSpriteSpawnHeight;
+
     private float screenWorldWidth;
     private float screenWorldHeight;
     private BackgroundStage bg;
@@ -73,12 +85,19 @@ public class Spawner : MonoBehaviour
             if (transform.position.y > nextAlienSpawnHeight)
                 SpawnAlien();
         }
+        else if (bg.CurrentStage == BackgroundStage.Stage.Sun)
+        {
+            if (transform.position.y > nextGoodSpriteSpawnHeight)
+                SpawnGoodSprite();
+            if (transform.position.y > nextEvilSpriteSpawnHeight)
+                SpawnEvilSprite();
+        }
     }
 
     void SpawnFly()
     {
         nextFlySpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenFlies, rangeDistanceBetweenFlies);
-        float flySpawnX = transform.position.x + Random.Range(minSpawnX, maxSpawnX);
+        float flySpawnX = Random.Range(minSpawnX, maxSpawnX);
         float flySpawnY = DefaultAboveHeight();
         Instantiate(fly, new Vector3(flySpawnX, flySpawnY), Quaternion.identity);
     }
@@ -86,7 +105,7 @@ public class Spawner : MonoBehaviour
     void SpawnBird()
     {
         nextBirdSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenBirds, rangeDistanceBetweenBirds);
-        float birdSpawnX = transform.position.x + Random.value < 0.5 ? minSpawnX : maxSpawnX + Utility.AroundValue(0, birdXJitter);
+        float birdSpawnX = Random.value < 0.5 ? minSpawnX : maxSpawnX + Utility.AroundValue(0, birdXJitter);
         float birdSpawnY = DefaultAboveHeight();
         Instantiate(bird, new Vector3(birdSpawnX, birdSpawnY), Quaternion.identity);
     }
@@ -94,7 +113,7 @@ public class Spawner : MonoBehaviour
     void SpawnCloud()
     {
         nextCloudSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenClouds, rangeDistanceBetweenClouds);
-        float cloudSpawnX = transform.position.x + minSpawnX * 4f;
+        float cloudSpawnX = minSpawnX * 4f;
         float cloudSpawnY = DefaultAboveHeight();
         Instantiate(cloud, new Vector3(cloudSpawnX, cloudSpawnY, 1), Quaternion.identity);
         //That 1 up there is important for not blocking stuff!
@@ -103,7 +122,7 @@ public class Spawner : MonoBehaviour
     void SpawnAsteroid()
     {
         nextAsteroidSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenAsteroids, rangeDistanceBetweenAsteroids);
-        float asteroidSpawnX = transform.position.x + Random.value < 0.5 ? minSpawnX * 2f : maxSpawnX * 2f;
+        float asteroidSpawnX = Random.value < 0.5 ? minSpawnX * 2f : maxSpawnX * 2f;
         float asteroidSpawnY = DefaultAboveHeight();
         Instantiate(asteroid, new Vector3(asteroidSpawnX, asteroidSpawnY), Quaternion.identity);
     }
@@ -116,6 +135,22 @@ public class Spawner : MonoBehaviour
         float alienSpawnY = DefaultAboveHeight();
         GameObject alienToSpawn = Instantiate(alien, new Vector3(alienSpawnX, alienSpawnY), Quaternion.identity) as GameObject;
         alienToSpawn.GetComponent<Alien>().Setup(minSpawnX, maxSpawnX, leftSide ? 1 : -1);
+    }
+
+    private void SpawnGoodSprite()
+    {
+        nextGoodSpriteSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenGoodSprites, rangeDistanceBetweenGoodSprites);
+        float goodSpriteSpawnX = Random.Range(minSpawnX, maxSpawnX);
+        float goodSpriteSpawnY = DefaultAboveHeight();
+        Instantiate(goodSprite, new Vector3(goodSpriteSpawnX, goodSpriteSpawnY), Quaternion.identity);
+    }
+
+    private void SpawnEvilSprite()
+    {
+        nextEvilSpriteSpawnHeight = transform.position.y + Utility.AroundValue(averageDistanceBetweenEvilSprites, rangeDistanceBetweenEvilSprites);
+        float evilSpriteSpawnX = Random.Range(minSpawnX, maxSpawnX);
+        float evilSpriteSpawnY = DefaultAboveHeight();
+        Instantiate(evilSprite, new Vector3(evilSpriteSpawnX, evilSpriteSpawnY), Quaternion.identity);
     }
 
     float DefaultAboveHeight()

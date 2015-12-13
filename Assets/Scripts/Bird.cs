@@ -17,6 +17,7 @@ public class Bird : MonoBehaviour
     private float sqrDiveThreshold;
     private bool diving;
     private AudioSource audioSource;
+    private MusicController mController;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Bird : MonoBehaviour
         sqrDiveThreshold = diveThreshold * diveThreshold;
         plant = GameObject.FindGameObjectWithTag("Player");
         audioSource = GetComponent<AudioSource>();
+        mController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MusicController>();
     }
 
     void Update()
@@ -33,8 +35,10 @@ public class Bird : MonoBehaviour
         {
             diving = true;
             StartCoroutine(Dive(difference));
-            audioSource.PlayOneShot(Utility.ChooseOne(birdCalls));
-            audioSource.PlayOneShot(Utility.ChooseOne(screeches));
+            if (mController.SFXplaying)
+                audioSource.PlayOneShot(Utility.ChooseOne(birdCalls));
+            if (mController.SFXplaying)
+                audioSource.PlayOneShot(Utility.ChooseOne(screeches));
         }
     }
 
