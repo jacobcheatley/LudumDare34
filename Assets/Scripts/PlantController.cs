@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using UnityEngine;
 
 public class PlantController : MonoBehaviour
@@ -14,16 +15,18 @@ public class PlantController : MonoBehaviour
     [Header("Eating")]
     [SerializeField] private float speedBoostPerFly = 0.25f;
     [SerializeField] private float healthBoostPerFly = 0.25f;
+    [SerializeField] private float scorePerFly = 50f;
     [SerializeField] private float speedBoostPerAlien = 0.5f;
     [SerializeField] private float healthBoostPerAlien = 0.25f;
-    [SerializeField] private float speedDecay = 3.0f;
-    [SerializeField] private float timeBetweenEatsBeforeSlow = 3.0f;
+    [SerializeField] private float scorePerAlien = 100f;
 
     [Header("Getting Hit")]
     [SerializeField] private float speedPenaltyPerBird = 2.5f;
     [SerializeField] private float damagePerBird = 1f;
+    [SerializeField] private float scoreLossPerBird = 100f;
     [SerializeField] private float speedPenaltyPerAsteroid = 5f;
     [SerializeField] private float damagePerAsteroid = 1f;
+    [SerializeField] private float scoreLossPerAsteroid = 250f;
     [SerializeField] private float hitCooldown = 1.0f;
 
     [Header("Sounds")]
@@ -55,6 +58,14 @@ public class PlantController : MonoBehaviour
             handler(this, e);
     }
 
+    public event EventHandler<ChangedScoreArgs> ChangedScore;
+    protected virtual void OnChangedScore(ChangedScoreArgs e)
+    {
+        EventHandler<ChangedScoreArgs> handler = ChangedScore;
+        if (handler != null)
+            handler(this, e);
+    }
+
     //Methods
     void Start()
     {
@@ -69,11 +80,6 @@ public class PlantController : MonoBehaviour
     {
         //Input
         horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        //Modifying Speed
-        if (Time.time > timeOfNextEat)
-            speed -= speedDecay * Time.deltaTime;
-        speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
 
         //Movement
         PerformMovement();
@@ -95,26 +101,35 @@ public class PlantController : MonoBehaviour
         {
             EatSpeedBoost(speedBoostPerFly);
             ModifyHealth(healthBoostPerFly);
+            ScoreEvent(scorePerFly, "CRUNCHY!");
             audioSource.PlayOneShot(other.GetComponent<Fly>().Death, 0.5f);
             Destroy(other.gameObject);
         }
         else if (other.name == "Bird(Clone)")
         {
             ModifyHealth(-damagePerBird);
+            ScoreEvent(-scoreLossPerBird, "SQUAWK SQUAWK!");
             HitSpeedPenalty(speedPenaltyPerBird);
         }
         else if (other.name == "Asteroid(Clone)")
         {
             ModifyHealth(-damagePerAsteroid);
+            ScoreEvent(-scoreLossPerAsteroid, "ASTEREKT!");
             HitSpeedPenalty(speedPenaltyPerAsteroid);
         }
         else if (other.name == "Alien(Clone)")
         {
             EatSpeedBoost(speedBoostPerAlien);
             ModifyHealth(healthBoostPerAlien);
+            ScoreEvent(scorePerAlien, "OUT OF THIS WORLD!");
             audioSource.PlayOneShot(Utility.ChooseOne(other.GetComponent<Alien>().DeathSounds), 0.5f);
             Destroy(other.gameObject);
         }
+    }
+
+    void ScoreEvent(float amount, string text)
+    {
+        OnChangedScore(new ChangedScoreArgs { Amount = amount, Text = text });
     }
 
     void ModifyHealth(float amount)
@@ -126,7 +141,6 @@ public class PlantController : MonoBehaviour
     
     void EatSpeedBoost(float speedBoost)
     {
-        timeOfNextEat = Time.time + timeBetweenEatsBeforeSlow;
         speed += speedBoost;
         OnChangedSpeed(new ChangedSpeedArgs { Amount = speedBoost, NewSpeed = speed});
         audioSource.PlayOneShot(chomp);
@@ -142,6 +156,12 @@ public class PlantController : MonoBehaviour
         }
         audioSource.PlayOneShot(hit);
     }
+}
+
+public class ChangedScoreArgs : EventArgs
+{
+    public float Amount { get; set; }
+    public string Text { get; set; }
 }
 
 public class ChangedSpeedArgs : EventArgs

@@ -26,6 +26,6 @@ public class TravelProgressBar : MonoBehaviour
     void Update()
     {
         slider.value = plantTransform.position.y;
-        plantHead.rectTransform.localPosition = new Vector3(0, 2f + slider.normalizedValue * rectTransform.rect.height - rectTransform.rect.height / 2);
+        plantHead.rectTransform.localPosition = new Vector3(0, 2f + slider.normalizedValue * rectTransform.rect.height - rectTransform.rect.height / 2, 2f);
     }
 }

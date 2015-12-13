@@ -31,8 +31,6 @@ public class HeartManager : MonoBehaviour
     {
         int fullHearts = (int)e.NewHealth;
         float partialFinalHeart = e.NewHealth - fullHearts;
-        Debug.Log(fullHearts);
-        Debug.Log(partialFinalHeart);
         for (int i = 0; i < fullHearts; i++)
             heartImages[i].fillAmount = 1;
         if (fullHearts != maxHealth)
