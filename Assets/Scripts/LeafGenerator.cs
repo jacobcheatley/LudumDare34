@@ -20,9 +20,7 @@ public class LeafGenerator : MonoBehaviour
         {
             bool leftSide = Random.value < 0.5;
             float horizontalPositionOffset = leftSide ? -stalkWidth / 2 : stalkWidth / 2;
-            GameObject newLeaf = Instantiate(leaf,
-                                             transform.position + new Vector3(horizontalPositionOffset, 0f),
-                                             Quaternion.Euler(0, leftSide ? 0 : 180, 0)) as GameObject;
+            Instantiate(leaf, transform.position + new Vector3(horizontalPositionOffset, 0f), Quaternion.Euler(0, leftSide ? 0 : 180, 0));
             heightOfNextLeaf = transform.position.y + averageLeafDistance + Random.Range(-leafDistanceRange, leafDistanceRange);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class BackgroundGraphics : MonoBehaviour
@@ -10,8 +11,12 @@ public class BackgroundGraphics : MonoBehaviour
     [SerializeField] private Color spaceColor;
     [SerializeField] private Color sunColor;
 
+    [Header("Background Overlays")]
+    [SerializeField] private GameObject[] overlayContainers;
+    
     private BackgroundStage bg;
     private SpriteRenderer backgroundSprite;
+    private SpriteRenderer[] overlayRenderers;
     
     void Start()
     {
@@ -20,20 +25,8 @@ public class BackgroundGraphics : MonoBehaviour
 
         backgroundSprite = GetComponent<SpriteRenderer>();
         backgroundSprite.color = skyColor;
-    }
 
-    void Update()
-    {
-//        if (transform.position.y > constants.skyEndHeight && bg.CurrentStage == BackgroundStage.Stage.Sky)
-//        {
-//            bg.CurrentStage++;
-//            StartCoroutine(TransitionBackground(skyColor, spaceColor));
-//        }
-//        if (transform.position.y > constants.spaceEndHeight && bg.CurrentStage == BackgroundStage.Stage.Space)
-//        {
-//            bg.CurrentStage++;
-//            StartCoroutine(TransitionBackground(spaceColor, sunColor));
-//        }
+        overlayRenderers = overlayContainers.Select(x => x.GetComponent<SpriteRenderer>()).ToArray();
     }
 
     void ChangedStage(object sender, ChangedStageArgs e)
@@ -41,15 +34,29 @@ public class BackgroundGraphics : MonoBehaviour
         switch (e.NewStage)
         {
             case BackgroundStage.Stage.Space:
-                StartCoroutine(TransitionBackground(skyColor, spaceColor));
+                StartCoroutine(TransitionOverlay(0, 1));
+                StartCoroutine(TransitionColor(skyColor, spaceColor));
                 break;
             case BackgroundStage.Stage.Sun:
-                StartCoroutine(TransitionBackground(spaceColor, sunColor));
+                StartCoroutine(TransitionOverlay(1, 2));
+                StartCoroutine(TransitionColor(spaceColor, sunColor));
                 break;
         }
     }
 
-    IEnumerator TransitionBackground(Color from, Color to)
+    IEnumerator TransitionOverlay(int prev, int next)
+    {
+        float initialHeight = transform.position.y;
+        float endHeight = initialHeight + transitionDistance;
+        while (transform.position.y <= endHeight)
+        {
+            overlayRenderers[prev].color = Color.Lerp(Color.white, Color.clear, (transform.position.y - initialHeight) / transitionDistance);
+            overlayRenderers[next].color = Color.Lerp(Color.clear, Color.white, (transform.position.y - initialHeight) / transitionDistance);
+            yield return null;
+        }
+    }
+
+    IEnumerator TransitionColor(Color from, Color to)
     {
         float initialHeight = transform.position.y;
         float endHeight = initialHeight + transitionDistance;
