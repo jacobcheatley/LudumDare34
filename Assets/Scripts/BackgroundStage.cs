@@ -9,7 +9,8 @@ public class BackgroundStage : MonoBehaviour
     {
         Sky,
         Space,
-        Sun
+        Sun,
+        End
     }
 
     private Stage _currentStage = Stage.Sky;
@@ -24,7 +25,7 @@ public class BackgroundStage : MonoBehaviour
     }
 
     //Events
-    [HideInInspector] public event EventHandler<ChangedStageArgs> ChangedStage;
+    public event EventHandler<ChangedStageArgs> ChangedStage;
     protected virtual void OnChangedStage(ChangedStageArgs e)
     {
         EventHandler<ChangedStageArgs> handler = ChangedStage;
@@ -32,16 +33,41 @@ public class BackgroundStage : MonoBehaviour
             handler(this, e);
     }
 
+    public event EventHandler<EndGameArgs> EndGame;
+    protected virtual void OnEndGame(EndGameArgs e)
+    {
+        EventHandler<EndGameArgs> handler = EndGame;
+        if (handler != null)
+            handler(this, e);
+    }
+
+    private Transform playerTransform;
+
+    void Start()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     void Update()
     {
-        if (transform.position.y > constants.skyEndHeight && CurrentStage == Stage.Sky)
+        if (playerTransform.position.y > constants.skyEndHeight && CurrentStage == Stage.Sky)
             CurrentStage++;
-        if (transform.position.y > constants.spaceEndHeight && CurrentStage == Stage.Space)
+        if (playerTransform.position.y > constants.spaceEndHeight && CurrentStage == Stage.Space)
             CurrentStage++;
+        if (playerTransform.position.y > constants.sunEndHeight && CurrentStage == Stage.Sun)
+        {
+            OnEndGame(new EndGameArgs { Died = false });
+            CurrentStage = Stage.End;
+        }
     }
 }
 
 public class ChangedStageArgs : EventArgs
 {
     public BackgroundStage.Stage NewStage { get; set; }
+}
+
+public class EndGameArgs : EventArgs
+{
+    public bool Died { get; set; }
 }

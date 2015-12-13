@@ -45,7 +45,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 41fc9c27c8b837247a6f26fe020fefea, type: 3}
   - {fileID: 21300004, guid: 41fc9c27c8b837247a6f26fe020fefea, type: 3}
   - {fileID: 21300006, guid: 41fc9c27c8b837247a6f26fe020fefea, type: 3}
-  lifeTime: 3
+  lifeTime: 5
 --- !u!212 &21218134
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -85,7 +85,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: lifeTime
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID

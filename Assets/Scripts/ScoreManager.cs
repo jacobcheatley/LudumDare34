@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 
     private Text scoreDisplayText;
     private PlantController player;
-    private float currentScore;
+    public float CurrentScore;
 
     void Start()
     {
@@ -25,12 +25,12 @@ public class ScoreManager : MonoBehaviour
         popup.transform.localPosition = new Vector3(0, 0, 5f);
         popup.GetComponent<ScorePopup>().Setup(e);
 
-        currentScore += e.Amount;
+        CurrentScore += e.Amount;
         UpdateDisplayText();
     }
 
     private void UpdateDisplayText()
     {
-        scoreDisplayText.text = currentScore.ToString("#;-#;0");
+        scoreDisplayText.text = CurrentScore.ToString("#;-#;0");
     }
 }

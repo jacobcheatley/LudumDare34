@@ -43,7 +43,6 @@ public class PlantController : MonoBehaviour
     //Hidden or private
     [HideInInspector] public float speed;
     [HideInInspector] public float health;
-    private float timeOfNextEat;
     private float horizontalInput;
     private float timeSinceLastHit;
     private AudioSource audioSource;
@@ -79,7 +78,6 @@ public class PlantController : MonoBehaviour
         speed = minSpeed;
         health = maxHealth;
         timeSinceLastHit = hitCooldown;
-        timeOfNextEat = Time.time;
         audioSource = GetComponent<AudioSource>();
     }
 
