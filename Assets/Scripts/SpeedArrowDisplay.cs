@@ -22,13 +22,9 @@ public class SpeedArrowDisplay : MonoBehaviour
         plant.ChangedSpeed += ChangedSpeed;
     }
 
-    void Update()
-    {
-        arrow.fillAmount = (plant.speed - plant.minSpeed) / (plant.maxSpeed - plant.minSpeed);
-    }
-
     void ChangedSpeed(object sender, ChangedSpeedArgs e)
     {
+        arrow.fillAmount = (e.NewSpeed - plant.minSpeed) / (plant.maxSpeed - plant.minSpeed);
         if (e.Amount > 0)
         {
             StartCoroutine(IncreaseSize());

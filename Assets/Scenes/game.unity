@@ -113,11 +113,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 948293086}
-  m_RootOrder: 2
+  m_Father: {fileID: 1219808705}
+  m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: -300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64100768
@@ -394,11 +394,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 948293086}
-  m_RootOrder: 1
+  m_Father: {fileID: 1219808705}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: -300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238779807
@@ -1239,8 +1239,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1649360349}
-  - {fileID: 238779806}
-  - {fileID: 64100767}
+  - {fileID: 1219808705}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
@@ -1248,6 +1247,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1219808704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1219808705}
+  m_Layer: 5
+  m_Name: Speed Arrow Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1219808705
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1219808704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 238779806}
+  - {fileID: 64100767}
+  m_Father: {fileID: 948293086}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -165, y: -300}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1321598952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,16 +1760,22 @@ MonoBehaviour:
   minSpeed: 3
   maxSpeed: 10
   horizontalSpeedRatio: 0.75
+  maxHealth: 5
   speedBoostPerFly: 0.25
+  healthBoostPerFly: 0.25
   speedBoostPerAlien: 0.5
+  healthBoostPerAlien: 0.25
   speedDecay: 3
   timeBetweenEatsBeforeSlow: 3
   speedPenaltyPerBird: 2.5
+  damagePerBird: 1
   speedPenaltyPerAsteroid: 5
+  damagePerAsteroid: 1
   hitCooldown: 1
   chomp: {fileID: 8300000, guid: a03bba54a05301e419291790d63918f9, type: 3}
   hit: {fileID: 8300000, guid: f23c8f5d2358ba84ab7f4feb0058457a, type: 3}
   speed: 0
+  health: 0
 --- !u!58 &1876186375
 CircleCollider2D:
   m_ObjectHideFlags: 0
