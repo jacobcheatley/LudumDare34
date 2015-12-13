@@ -137,10 +137,8 @@ MonoBehaviour:
   birdCalls:
   - {fileID: 8300000, guid: 174a1b5a9ebdd5046b35bdcfb1f7920c, type: 3}
   - {fileID: 8300000, guid: 351b127d2ae23c54293e3919620143fe, type: 3}
-  wingFlaps:
-  - {fileID: 8300000, guid: 9a883380a9b72a64eaef431dada53881, type: 3}
-  - {fileID: 8300000, guid: 810d2e1b6fa236e4fb4e535627c0d6b4, type: 3}
-  - {fileID: 8300000, guid: 5b762ac14bc65b44da8db4682894d74b, type: 3}
+  screeches:
+  - {fileID: 8300000, guid: 0ff918b0bfab44b44b91641ddfbfd67c, type: 3}
 --- !u!212 &21277892
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -184,7 +182,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: wingFlaps.Array.size
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: screeches.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: diveThreshold
@@ -198,6 +200,22 @@ Prefab:
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wingFlaps.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wingFlaps.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wingFlaps.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ff918b0bfab44b44b91641ddfbfd67c, type: 3}
+    - target: {fileID: 0}
+      propertyPath: screeches.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ff918b0bfab44b44b91641ddfbfd67c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111988}

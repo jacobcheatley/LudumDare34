@@ -4,7 +4,7 @@ public static class Utility
 {
     public static T ChooseOne<T>(T[] arr)
     {
-        return arr[Random.Range(0, arr.Length - 1)];
+        return arr[Random.Range(0, arr.Length)];
     }
 
     public static float AroundValue(float value, float range)

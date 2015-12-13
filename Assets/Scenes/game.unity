@@ -2023,19 +2023,35 @@ MonoBehaviour:
   maxHealth: 5
   speedBoostPerFly: 0.25
   healthBoostPerFly: 0.25
-  scorePerFly: 50
   speedBoostPerAlien: 0.5
   healthBoostPerAlien: 0.25
-  scorePerAlien: 100
   speedPenaltyPerBird: 2.5
   damagePerBird: 1
-  scoreLossPerBird: 100
   speedPenaltyPerAsteroid: 5
   damagePerAsteroid: 1
-  scoreLossPerAsteroid: 250
   hitCooldown: 1
   chomp: {fileID: 8300000, guid: a03bba54a05301e419291790d63918f9, type: 3}
   hit: {fileID: 8300000, guid: f23c8f5d2358ba84ab7f4feb0058457a, type: 3}
+  scorePerFly: 50
+  flyStrings:
+  - CRUNCHY!
+  - NOM NOM NOM!
+  - BZZT!
+  scorePerAlien: 100
+  alienStrings:
+  - BEEP BOOP!
+  - THEY COME IN PIECES!
+  - OUT OF THIS WORLD!
+  scoreLossPerBird: 100
+  birdStrings:
+  - SQUAWK!
+  - SQUAWK SQUAWK!
+  - SQUAWK SQUAWK SQUAWK!
+  scoreLossPerAsteroid: 250
+  asteroidStrings:
+  - HARD LUCK!
+  - ASTEREKT!
+  - EXTINCTION!
   speed: 0
   health: 0
 --- !u!58 &1876186375

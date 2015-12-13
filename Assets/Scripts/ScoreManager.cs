@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlantController>();
         scoreDisplayText = scoreDisplay.GetComponent<Text>();
         player.ChangedScore += ChangedScore;
-        scoreDisplayText.text = currentScore.ToString("#;-#;0");
+        UpdateDisplayText();
     }
 
     private void ChangedScore(object sender, ChangedScoreArgs e)
@@ -26,6 +26,11 @@ public class ScoreManager : MonoBehaviour
         popup.GetComponent<ScorePopup>().Setup(e);
 
         currentScore += e.Amount;
+        UpdateDisplayText();
+    }
+
+    private void UpdateDisplayText()
+    {
         scoreDisplayText.text = currentScore.ToString("#;-#;0");
     }
 }

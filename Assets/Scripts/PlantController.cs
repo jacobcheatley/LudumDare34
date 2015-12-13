@@ -15,23 +15,30 @@ public class PlantController : MonoBehaviour
     [Header("Eating")]
     [SerializeField] private float speedBoostPerFly = 0.25f;
     [SerializeField] private float healthBoostPerFly = 0.25f;
-    [SerializeField] private float scorePerFly = 50f;
     [SerializeField] private float speedBoostPerAlien = 0.5f;
     [SerializeField] private float healthBoostPerAlien = 0.25f;
-    [SerializeField] private float scorePerAlien = 100f;
 
     [Header("Getting Hit")]
     [SerializeField] private float speedPenaltyPerBird = 2.5f;
     [SerializeField] private float damagePerBird = 1f;
-    [SerializeField] private float scoreLossPerBird = 100f;
     [SerializeField] private float speedPenaltyPerAsteroid = 5f;
     [SerializeField] private float damagePerAsteroid = 1f;
-    [SerializeField] private float scoreLossPerAsteroid = 250f;
     [SerializeField] private float hitCooldown = 1.0f;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip chomp;
     [SerializeField] private AudioClip hit;
+
+    [Header("Scores")]
+    [SerializeField] private float scorePerFly = 50f;
+    [SerializeField] private string[] flyStrings;
+    [SerializeField] private float scorePerAlien = 100f;
+    [SerializeField] private string[] alienStrings;
+    [SerializeField] private float scoreLossPerBird = 100f;
+    [SerializeField] private string[] birdStrings;
+    [SerializeField] private float scoreLossPerAsteroid = 250f;
+    [SerializeField] private string[] asteroidStrings;
+
 
     //Hidden or private
     [HideInInspector] public float speed;
@@ -82,6 +89,7 @@ public class PlantController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         //Movement
+        speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
         PerformMovement();
 
         //Tracking variables
@@ -101,27 +109,27 @@ public class PlantController : MonoBehaviour
         {
             EatSpeedBoost(speedBoostPerFly);
             ModifyHealth(healthBoostPerFly);
-            ScoreEvent(scorePerFly, "CRUNCHY!");
+            ScoreEvent(scorePerFly, Utility.ChooseOne(flyStrings));
             audioSource.PlayOneShot(other.GetComponent<Fly>().Death, 0.5f);
             Destroy(other.gameObject);
         }
         else if (other.name == "Bird(Clone)")
         {
             ModifyHealth(-damagePerBird);
-            ScoreEvent(-scoreLossPerBird, "SQUAWK SQUAWK!");
+            ScoreEvent(-scoreLossPerBird, Utility.ChooseOne(birdStrings));
             HitSpeedPenalty(speedPenaltyPerBird);
         }
         else if (other.name == "Asteroid(Clone)")
         {
             ModifyHealth(-damagePerAsteroid);
-            ScoreEvent(-scoreLossPerAsteroid, "ASTEREKT!");
+            ScoreEvent(-scoreLossPerAsteroid, Utility.ChooseOne(asteroidStrings));
             HitSpeedPenalty(speedPenaltyPerAsteroid);
         }
         else if (other.name == "Alien(Clone)")
         {
             EatSpeedBoost(speedBoostPerAlien);
             ModifyHealth(healthBoostPerAlien);
-            ScoreEvent(scorePerAlien, "OUT OF THIS WORLD!");
+            ScoreEvent(scorePerAlien, Utility.ChooseOne(alienStrings));
             audioSource.PlayOneShot(Utility.ChooseOne(other.GetComponent<Alien>().DeathSounds), 0.5f);
             Destroy(other.gameObject);
         }

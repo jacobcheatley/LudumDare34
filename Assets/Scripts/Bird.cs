@@ -11,7 +11,7 @@ public class Bird : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip[] birdCalls;
-    [SerializeField] private AudioClip[] wingFlaps;
+    [SerializeField] private AudioClip[] screeches;
 
     private GameObject plant;
     private float sqrDiveThreshold;
@@ -34,7 +34,7 @@ public class Bird : MonoBehaviour
             diving = true;
             StartCoroutine(Dive(difference));
             audioSource.PlayOneShot(Utility.ChooseOne(birdCalls));
-            audioSource.PlayOneShot(Utility.ChooseOne(wingFlaps));
+            audioSource.PlayOneShot(Utility.ChooseOne(screeches));
         }
     }
 
