@@ -4258,7 +4258,7 @@ MonoBehaviour:
   maxSpeed: 10
   horizontalSpeedRatio: 0.75
   maxHealth: 4
-  speedBoostPerFly: 0.25
+  speedBoostPerFly: 0.5
   healthBoostPerFly: 0.25
   speedBoostPerAlien: 0.5
   healthBoostPerAlien: 0.25
@@ -4266,9 +4266,9 @@ MonoBehaviour:
   healthBoostPerGoodSprite: 0.25
   speedPenaltyPerBird: 2.5
   damagePerBird: 1
-  speedPenaltyPerAsteroid: 5
+  speedPenaltyPerAsteroid: 2.5
   damagePerAsteroid: 1
-  speedPenaltyPerEvilSprite: 2
+  speedPenaltyPerEvilSprite: 2.5
   damagePerEvilSprite: 1
   hitCooldown: 1
   chomp: {fileID: 8300000, guid: a03bba54a05301e419291790d63918f9, type: 3}

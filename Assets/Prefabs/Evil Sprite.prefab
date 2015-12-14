@@ -56,10 +56,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfRepositions: 3
-  speed: 2
-  radiusAroundPlayer: 3
+  speed: 1
+  radiusAroundPlayer: 2
   maxRepositionTime: 2
-  heightAbovePlayer: 1
+  heightAbovePlayer: 2
+  fadeOutTime: 1
 --- !u!212 &21287598
 SpriteRenderer:
   m_ObjectHideFlags: 1
